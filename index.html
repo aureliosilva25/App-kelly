@@ -1,0 +1,34 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c65370"><title>Kelly Podologia</title>
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><button class="hamb" onclick="show('config')">☰</button><div class="brand">Kelly <span>Podologia</span></div><button id="install" class="bell" hidden>⬇</button></header>
+<main>
+<section id="dashboard" class="page active"><h1>Dashboard</h1><p id="dataHoje" class="muted"></p>
+<div class="stats"><article class="blue">▣<div><small>Atendimentos</small><b id="stAt">0</b><em>hoje</em></div></article><article class="green">▣<div><small>Faturamento</small><b id="stRec">R$ 0,00</b><em>mês</em></div></article><article class="red">▣<div><small>Despesas</small><b id="stDes">R$ 0,00</b><em>mês</em></div></article><article class="mint">✂<div><small>Lucro</small><b id="stLuc">R$ 0,00</b><em>mês</em></div></article></div>
+<div class="title"><h2>Próximos atendimentos</h2><button class="link" onclick="show('agenda')">Ver todos</button></div><div id="dashAgenda"></div></section>
+
+<section id="agenda" class="page"><div class="title"><h1>Agenda</h1><button onclick="agendaForm()">+ Novo</button></div><input id="agendaData" type="date" onchange="renderAgenda()"><div id="agendaList"></div></section>
+<section id="clientes" class="page"><div class="title"><h1>Clientes</h1><button onclick="clienteForm()">+ Novo cliente</button></div><input id="clienteBusca" placeholder="⌕ Buscar cliente..." oninput="renderClientes()"><div id="clientesList"></div></section>
+
+<section id="ficha" class="page"><div class="title"><h1 id="fichaNome">Ficha</h1><button class="soft" onclick="show('clientes')">Voltar</button></div>
+<div class="tabs"><button onclick="tabFicha('dados')">Dados</button><button onclick="tabFicha('anamnese')">Anamnese</button><button onclick="tabFicha('evolucao')">Evolução</button><button onclick="tabFicha('fotos')">Fotos</button><button onclick="tabFicha('fincli')">Financeiro</button></div>
+<div id="fichaConteudo"></div></section>
+
+<section id="protocolos" class="page"><div class="title"><h1>Protocolos</h1><button onclick="protocoloForm()">+ Novo</button></div><div class="tabs"><button onclick="protFiltro='Podologia';renderProtocolos()">Podologia</button><button onclick="protFiltro='Pedicure';renderProtocolos()">Pedicure</button><button onclick="protFiltro='Manicure';renderProtocolos()">Manicure</button></div><div id="protocolosList"></div></section>
+<section id="servicos" class="page"><div class="title"><h1>Serviços</h1><button onclick="servicoForm()">+ Novo serviço</button></div><div id="servicosList"></div></section>
+
+<section id="financeiro" class="page"><div class="title"><h1>Financeiro</h1><button onclick="financeiroForm()">+ Lançamento</button></div>
+<div class="tabs"><button onclick="finFiltro='todos';renderFinanceiro()">Todos</button><button onclick="finFiltro='entrada';renderFinanceiro()">Entradas</button><button onclick="finFiltro='saida';renderFinanceiro()">Despesas</button></div>
+<div class="stats mini"><article class="green"><div><small>Receitas</small><b id="finRec">R$ 0</b></div></article><article class="red"><div><small>Despesas</small><b id="finDes">R$ 0</b></div></article><article class="mint"><div><small>Lucro</small><b id="finLuc">R$ 0</b></div></article></div><div id="financeiroList"></div></section>
+
+<section id="relatorios" class="page"><h1>Relatórios</h1><div class="stats mini"><article class="blue"><div><small>Faturamento</small><b id="relRec"></b></div></article><article class="red"><div><small>Despesas</small><b id="relDes"></b></div></article><article class="mint"><div><small>Resultado</small><b id="relLuc"></b></div></article></div><h2>Serviços realizados</h2><div id="relServicos"></div></section>
+
+<section id="config" class="page"><h1>Configurações</h1><div class="settings">
+<button onclick="show('protocolos')">📋 Protocolos e procedimentos <span>›</span></button><button onclick="show('servicos')">💅 Serviços e preços <span>›</span></button><button onclick="show('relatorios')">📊 Relatórios <span>›</span></button>
+<button onclick="exportBackup()">⬇ Exportar backup <span>›</span></button><label>⬆ Importar backup <span>›</span><input type="file" accept=".json" onchange="importBackup(this.files[0])"></label><button onclick="resetDemo()">✨ Repor dados demonstrativos <span>›</span></button></div></section>
+</main>
+<nav><button onclick="show('dashboard')">⌂<small>Início</small></button><button onclick="show('agenda')">▣<small>Agenda</small></button><button onclick="show('clientes')">♙<small>Clientes</small></button><button onclick="show('financeiro')">▤<small>Financeiro</small></button><button onclick="show('config')">☰<small>Mais</small></button></nav>
+<dialog id="modal"><form id="modalForm"><div class="title"><h2 id="modalTitle"></h2><button type="button" class="x" onclick="modal.close()">×</button></div><div id="modalBody"></div><div class="actions"><button type="button" class="soft" onclick="modal.close()">Cancelar</button><button>Salvar</button></div></form></dialog>
+<script src="db.js"></script><script src="app.js"></script><script src="clientes.js"></script><script src="agenda.js"></script><script src="servicos.js"></script><script src="protocolos.js"></script><script src="financeiro.js"></script><script src="atendimentos.js"></script><script src="relatorios.js"></script></body></html>
